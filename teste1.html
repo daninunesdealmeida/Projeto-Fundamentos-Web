@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Caution</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <script src="js.js"></script>
+</head>
+
+<body>
+    <div id="div1">
+        <nav class="navbar navbar-expand bg-dark navbar-dark">
+            <ul style="color: white;" class="navbar-nav">
+                <li class="nav-item active">
+                    <button class="btn btn-dark">
+                        <a class="nav-link" href="index.html">Home</a></button>
+                </li>
+                <li class="nav-item active">
+                    <button class="btn btn-dark">
+                        <a class="nav-link" href="agenda.html">Agenda</a></button>
+                </li>
+                <li class="nav-item active">
+                    <button class="btn btn-dark">
+                        <a class="nav-link" href="desenho.html">Desenho</a></button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <hr>
+    <div style="text-align: center;">
+        <h1 style="color: darkred;">ERRO!</h1>
+        <h4>O e-mail cadastrado é inválido.</h4>
+        
+        <img id="imagem" src="img/chrome.png" width="256" height="256">
+    </div>
+    
+    <br>
+
+
+    <script>
+        //document.write("Navegador: ", navigator.appName, " - ", navigator.appCodeName, "<br/>");
+        //document.write("Versão: ", navigator.appVersion, "<br/>");
+
+        var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+        var isFirefox = typeof InstallTrigger !== 'undefined';
+        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+
+        var isChrome = !!window.chrome && !isOpera;
+        var isEdge = false || !!document.documentMode;
+
+        var img = document.getElementById("imagem");
+        if (isOpera) {
+            img.src = "img/opera.png";
+            //document.getElementById("imagem").innerHTML = "O navegador em uso é o Opera!"; 
+            document.write(""); 
+        }
+        else if (isFirefox) {
+            img.src = "img/firefox.png";
+            //document.getElementById("imagem").innerHTML = "O navegador em uso é o Mozilla!"; 
+            document.write(""); 
+        }
+        else if (isChrome) {
+            img.src = "img/chrome.png";
+            //document.getElementById("imagem").innerHTML = "O navegador em uso é o Chrome!"; 
+            document.write(""); 
+        }
+        else if (isSafari) {
+            img.src = "img/safari.png";
+            //document.getElementById("imagem").innerHTML = "O navegador em uso é o Safari!"; 
+            document.write(""); 
+        }
+        else if (isEdge) {
+            img.src = "img/edge.png";
+            //document.getElementById("imagem").innerHTML = "O navegador em uso é o Edge!"; 
+            document.write(""); 
+        }
+
+
+    </script>
+
+    <hr>
+
+
+
+    <footer style="text-align: center;" id="footer" class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">Todos os direitos reservados a: @ Caution S.A - Construído por: Daniel de Almeida,
+                Raphael Bristot, Vinícius Antoniolli</span>
+        </div>
+    </footer>
+    <br>
+
+</body>
+
+</html>

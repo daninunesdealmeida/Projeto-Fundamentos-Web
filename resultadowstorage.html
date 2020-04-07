@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<title>Caution</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script type="text/javascript" src="/Trabalho Página Web/js.js"></script>
+	<script src="Canvas.js"></script>
+
+</head>
+
+<body>
+
+	<div id="div1">
+		<nav class="navbar navbar-expand bg-dark navbar-dark">
+			<ul style="color: white;" class="navbar-nav">
+				<li class="nav-item active">
+					<button class="btn btn-dark">
+						<a class="nav-link" href="index.html">Home</a></button>
+				</li>
+				<li class="nav-item active">
+					<button class="btn btn-dark">
+						<a class="nav-link" href="agenda.html">Agenda</a></button>
+				</li>
+				<li class="nav-item active">
+					<button class="btn btn-dark">
+						<a class="nav-link" href="desenho.html">Desenho</a></button>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<hr>
+	<br>
+	<div class="container">
+		<table>
+			<tr>
+				<th><h4> Nome - Telefone - E-mail </h4></th>
+			</tr>
+			<tr>
+				<td style="border: solid;" id="demo"></td>
+			</tr>
+		</table>
+	</div>
+	<hr>
+</body>
+
+<footer style="text-align: center;" id="footer" class="footer mt-auto py-3">
+	<div class="container">
+		<span class="text-muted">Todos os direitos reservados a: @ Caution S.A - Construído por: Daniel de Almeida,
+			Raphael Bristot, Vinicuis
+			Antoniolli</span>
+	</div>
+</footer>
+<br>
+<script>
+
+
+	function getUrlVars() {
+		var i;
+		var vars = new Array();
+		var parteString;
+		var todaString = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+		for (var i = 0; i < todaString.length - 1; i++) {
+			parteString = todaString[i].split('=');
+			parteString[1] = unescape(parteString[1]);
+			vars.push(parteString[0]);
+			vars[parteString[0]] = parteString[1];
+		}
+
+		return vars;
+	}
+
+
+	/* Chama a função e mostra o resultado */
+	var result = getUrlVars();
+	var i, nomeVar;
+
+	/* Verifica se já existem dados armazenados no web storage do navegador */
+	var old = localStorage.getItem("testJSON");
+	if (old) {  /* Removendo [ ] para inserir novo registro JSON */
+		old = old.substring(1);
+		old = old.substring(0, old.length - 1);
+	}
+
+	/* Preparando e gravando em "localStorage" uma string JSON */
+	if (result.length > 0) {
+		var myObjJSON = "{";
+
+		for (i = 0; i < result.length; i++) {
+			nomeVar = result[i];
+			myObjJSON += "\"" + nomeVar + "\"" + ":\"" + (result[nomeVar] != "" ? result[nomeVar] : "null") + "\"";
+			if (i != result.length - 1)  /* Se não é o último item, separa por vírgula */
+				myObjJSON += ",";
+			else  /* Caso contrário, fecha o JSON */
+				myObjJSON += "}";
+		}
+		/* Concatena os dados e insere novamente os delimitadores de início e fim do array JSON */
+		var data = old ? old + "," + myObjJSON : myObjJSON;
+		data = "[" + data + "]";
+
+		/* Armazena os dados no navegador do cliente sem expirar data, definindo um apelido */
+		localStorage.setItem("testJSON", data);
+	}
+
+	/* Lendo e formatando dados JSON armazenados no "localStorage", chamando pelo apelido */
+	text = localStorage.getItem("testJSON");
+	/* Faz o parser para tratar a string como objeto */
+	obj = JSON.parse(text);
+
+	/* Navega pelo objeto e monta a string de saída, registro por registro */
+	var txt = "";
+
+	for (objDados of obj) {
+
+		/* Verifica quantos objetos tem em cada registro */
+		var count = 0;
+		for (campo in objDados) {
+			if (Object.prototype.hasOwnProperty.call(objDados, campo)) {
+				count++;
+			}
+		}
+
+		/* Prepara a string de saída, formatada linha a linha */
+		var tamanho = 0;
+		for (campo in objDados) {
+			txt += campo + ": " + objDados[campo];
+			if (tamanho != count - 1)
+				txt += ", ";
+			else
+				txt += ".";
+			tamanho++;
+		}
+		txt += "<br>";
+	}
+
+	/* Exibe resultado em um parágrafo da página HTML */
+	document.getElementById("demo").innerHTML = txt;
+</script>
+
+
+</html>
